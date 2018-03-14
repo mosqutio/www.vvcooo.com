@@ -1,4 +1,6 @@
-# Basic
-title: vvcooo
+
 subtitle: Try Best
 description: Welcome Here
+title: vvcooo
+
+permalink: /:month-:day-:year/:title.html
