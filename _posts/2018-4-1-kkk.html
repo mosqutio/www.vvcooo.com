@@ -1,0 +1,823 @@
+    <style>
+        .trace {
+            min-width: 900px;
+            width: 100%;
+        }
+
+        .trace tr:hover {
+            background-color: #D9EDF7 !important;
+        }
+
+        .trace tr td {
+            width: 14%;
+            white-space: nowrap;
+            padding: 2px;
+            border-right: 1px solid #EEE;
+        }
+
+        .trace tr td.details {
+            width: 10%;
+            padding-right: 20px;
+        }
+
+        .trace.cursor_pointer_on_hover {
+            cursor: pointer;
+        }
+
+        .trace .level {
+            width: 10%;
+            font-weight: bold;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .duration {
+            width: 25px;
+            margin: 0px;
+            padding: 0px;
+            background-color: #C6EFF3;
+            border-radius: 4px;
+            font-size: 10px;
+        }
+
+        .duration div {
+            padding-top: 4px;
+            padding-bottom: 4px;
+            text-align: center;
+        }
+
+        dl {
+            margin: 5px 0px;
+        }
+
+        .hljs {
+            white-space: pre;
+            word-wrap: normal;
+        }
+
+        .hljs.wrapped {
+            white-space: pre-wrap;
+        }
+
+        .toggle-button {
+            margin-top: -7px;
+        }
+
+    </style>
+    <script>
+        var static_files = false;
+        if (static_files){
+            document.write('<link rel="stylesheet" href="/libs/bootstrap.min.css">');
+            document.write('<link rel="stylesheet" href="/libs/github.min.css">');
+            document.write('<script type="text/javascript" src="/libs/angular.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="/libs/ui-bootstrap-tpls-2.3.1.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="/libs/highlight.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="/libs/angular-highlightjs.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="/libs/angular-ui-tree.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="/libs/angular-ui-tree-filter.js"><\/script>');
+        }
+        else{
+            document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">');
+            document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/github.min.css">');
+            document.write('<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.1.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://cdn.rawgit.com/angular-ui-tree/angular-ui-tree/master/dist/angular-ui-tree.min.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://cdn.rawgit.com/EE/angular-ui-tree-filter/master/dist/angular-ui-tree-filter.js"><\/script>');
+        }
+    </script>
+
+    <script>
+        (function(angular) {
+            'use strict';
+
+            var OSProfilerData = {
+    "info": {
+        "name": "total",
+        "started": 0,
+        "finished": 11715,
+        "last_trace_started": 10613
+    },
+    "children": [
+        {
+            "info": {
+                "name": "first",
+                "project": "test_project",
+                "service": "test_service",
+                "host": "linux-r0m1",
+                "meta.raw_payload.first-start": {
+                    "name": "first-start",
+                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                    "trace_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                    "parent_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                    "timestamp": "2018-03-31T15:22:00.862246",
+                    "info": {
+                        "host": "linux-r0m1"
+                    },
+                    "project": "test_project",
+                    "service": "test_service"
+                },
+                "started": 0,
+                "meta.raw_payload.first-stop": {
+                    "name": "first-stop",
+                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                    "trace_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                    "parent_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                    "timestamp": "2018-03-31T15:22:12.578180",
+                    "info": {
+                        "host": "linux-r0m1"
+                    },
+                    "project": "test_project",
+                    "service": "test_service"
+                },
+                "finished": 11715,
+                "exception": "None"
+            },
+            "trace_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+            "parent_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+            "children": [
+                {
+                    "info": {
+                        "name": "third",
+                        "project": "test_project",
+                        "service": "test_service",
+                        "host": "linux-r0m1",
+                        "meta.raw_payload.third-start": {
+                            "name": "third-start",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "e9b11ee1-e213-47ea-8c5f-56ee64f631b3",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:00.862465",
+                            "info": {
+                                "function": {
+                                    "name": "__main__.test_function",
+                                    "args": "(3, 'hell0')",
+                                    "kwargs": "{}"
+                                },
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "started": 0,
+                        "meta.raw_payload.third-stop": {
+                            "name": "third-stop",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "e9b11ee1-e213-47ea-8c5f-56ee64f631b3",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:03.865698",
+                            "info": {
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "finished": 3003,
+                        "exception": "None"
+                    },
+                    "trace_id": "e9b11ee1-e213-47ea-8c5f-56ee64f631b3",
+                    "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                    "children": []
+                },
+                {
+                    "info": {
+                        "name": "test",
+                        "project": "test_project",
+                        "service": "test_service",
+                        "host": "linux-r0m1",
+                        "meta.raw_payload.test-start": {
+                            "name": "test-start",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "d432d8ae-78a0-419d-95fb-057f5b645619",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:03.866216",
+                            "info": {
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "started": 3003,
+                        "meta.raw_payload.test-stop": {
+                            "name": "test-stop",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "d432d8ae-78a0-419d-95fb-057f5b645619",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:03.866506",
+                            "info": {
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "finished": 3004,
+                        "exception": "None"
+                    },
+                    "trace_id": "d432d8ae-78a0-419d-95fb-057f5b645619",
+                    "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                    "children": []
+                },
+                {
+                    "info": {
+                        "name": "trace class",
+                        "project": "test_project",
+                        "service": "test_service",
+                        "host": "linux-r0m1",
+                        "meta.raw_payload.trace class-start": {
+                            "name": "trace class-start",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "089bb4d6-49bb-43fc-9d09-e9b83b1ec655",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:03.866913",
+                            "info": {
+                                "function": {
+                                    "name": "__main__.TestClass.test1",
+                                    "args": "(<__main__.TestClass object at 0x7fa81195a390>,)",
+                                    "kwargs": "{}"
+                                },
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "started": 3004,
+                        "meta.raw_payload.trace class-stop": {
+                            "name": "trace class-stop",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "089bb4d6-49bb-43fc-9d09-e9b83b1ec655",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:04.967941",
+                            "info": {
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "finished": 4105,
+                        "exception": "None"
+                    },
+                    "trace_id": "089bb4d6-49bb-43fc-9d09-e9b83b1ec655",
+                    "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                    "children": [
+                        {
+                            "info": {
+                                "name": "trace WQWW",
+                                "project": "test_project",
+                                "service": "test_service",
+                                "host": "linux-r0m1",
+                                "meta.raw_payload.trace WQWW-start": {
+                                    "name": "trace WQWW-start",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "7fa164a4-052c-488a-87af-3f2cf1d6dd72",
+                                    "parent_id": "089bb4d6-49bb-43fc-9d09-e9b83b1ec655",
+                                    "timestamp": "2018-03-31T15:22:03.867279",
+                                    "info": {
+                                        "function": {
+                                            "name": "__main__.TestClass2.test1",
+                                            "args": "(<__main__.TestClass2 object at 0x7fa81190d4a8>,)",
+                                            "kwargs": "{}"
+                                        },
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "started": 3005,
+                                "meta.raw_payload.trace WQWW-stop": {
+                                    "name": "trace WQWW-stop",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "7fa164a4-052c-488a-87af-3f2cf1d6dd72",
+                                    "parent_id": "089bb4d6-49bb-43fc-9d09-e9b83b1ec655",
+                                    "timestamp": "2018-03-31T15:22:04.967680",
+                                    "info": {
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "finished": 4105,
+                                "exception": "None"
+                            },
+                            "trace_id": "7fa164a4-052c-488a-87af-3f2cf1d6dd72",
+                            "parent_id": "089bb4d6-49bb-43fc-9d09-e9b83b1ec655",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "info": {
+                        "name": "trace class",
+                        "project": "test_project",
+                        "service": "test_service",
+                        "host": "linux-r0m1",
+                        "meta.raw_payload.trace class-start": {
+                            "name": "trace class-start",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "be0c10b1-c71f-44d1-b154-73810f759f4e",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:04.968192",
+                            "info": {
+                                "function": {
+                                    "name": "__main__.TestClass.test3",
+                                    "args": "(<__main__.TestClass object at 0x7fa81195a390>,)",
+                                    "kwargs": "{}"
+                                },
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "started": 4105,
+                        "meta.raw_payload.trace class-stop": {
+                            "name": "trace class-stop",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "be0c10b1-c71f-44d1-b154-73810f759f4e",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:05.269221",
+                            "info": {
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "finished": 4406,
+                        "exception": "None"
+                    },
+                    "trace_id": "be0c10b1-c71f-44d1-b154-73810f759f4e",
+                    "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                    "children": [
+                        {
+                            "info": {
+                                "name": "trace WQWW",
+                                "project": "test_project",
+                                "service": "test_service",
+                                "host": "linux-r0m1",
+                                "meta.raw_payload.trace WQWW-start": {
+                                    "name": "trace WQWW-start",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "d4f25fc2-9d16-4b0e-be78-faa3bcc6e98a",
+                                    "parent_id": "be0c10b1-c71f-44d1-b154-73810f759f4e",
+                                    "timestamp": "2018-03-31T15:22:04.968409",
+                                    "info": {
+                                        "function": {
+                                            "name": "__main__.TestClass2.test3",
+                                            "args": "(<__main__.TestClass2 object at 0x7fa81190d4a8>,)",
+                                            "kwargs": "{}"
+                                        },
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "started": 4106,
+                                "meta.raw_payload.trace WQWW-stop": {
+                                    "name": "trace WQWW-stop",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "d4f25fc2-9d16-4b0e-be78-faa3bcc6e98a",
+                                    "parent_id": "be0c10b1-c71f-44d1-b154-73810f759f4e",
+                                    "timestamp": "2018-03-31T15:22:05.268936",
+                                    "info": {
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "finished": 4406,
+                                "exception": "None"
+                            },
+                            "trace_id": "d4f25fc2-9d16-4b0e-be78-faa3bcc6e98a",
+                            "parent_id": "be0c10b1-c71f-44d1-b154-73810f759f4e",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "info": {
+                        "name": "trace class",
+                        "project": "test_project",
+                        "service": "test_service",
+                        "host": "linux-r0m1",
+                        "meta.raw_payload.trace class-start": {
+                            "name": "trace class-start",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:05.269526",
+                            "info": {
+                                "function": {
+                                    "name": "__main__.TestClass.test2",
+                                    "args": "(<__main__.TestClass object at 0x7fa81195a390>,)",
+                                    "kwargs": "{}"
+                                },
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "started": 4407,
+                        "meta.raw_payload.trace class-stop": {
+                            "name": "trace class-stop",
+                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                            "trace_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                            "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                            "timestamp": "2018-03-31T15:22:12.577895",
+                            "info": {
+                                "host": "linux-r0m1"
+                            },
+                            "project": "test_project",
+                            "service": "test_service"
+                        },
+                        "finished": 11715,
+                        "exception": "None"
+                    },
+                    "trace_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                    "parent_id": "6927280a-1c07-41aa-a89d-fbb1f0736b73",
+                    "children": [
+                        {
+                            "info": {
+                                "name": "trace WQWW",
+                                "project": "test_project",
+                                "service": "test_service",
+                                "host": "linux-r0m1",
+                                "meta.raw_payload.trace WQWW-start": {
+                                    "name": "trace WQWW-start",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "ea01a5fd-7250-4b21-a424-01af57146277",
+                                    "parent_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                                    "timestamp": "2018-03-31T15:22:06.270954",
+                                    "info": {
+                                        "function": {
+                                            "name": "__main__.TestClass2.test2",
+                                            "args": "(<__main__.TestClass2 object at 0x7fa81190d4a8>,)",
+                                            "kwargs": "{}"
+                                        },
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "started": 5408,
+                                "meta.raw_payload.trace WQWW-stop": {
+                                    "name": "trace WQWW-stop",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "ea01a5fd-7250-4b21-a424-01af57146277",
+                                    "parent_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                                    "timestamp": "2018-03-31T15:22:09.272289",
+                                    "info": {
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "finished": 8410,
+                                "exception": "None"
+                            },
+                            "trace_id": "ea01a5fd-7250-4b21-a424-01af57146277",
+                            "parent_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                            "children": []
+                        },
+                        {
+                            "info": {
+                                "name": "trace class",
+                                "project": "test_project",
+                                "service": "test_service",
+                                "host": "linux-r0m1",
+                                "meta.raw_payload.trace class-start": {
+                                    "name": "trace class-start",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "eaaadbb4-67e6-4a04-8590-854619413656",
+                                    "parent_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                                    "timestamp": "2018-03-31T15:22:11.475120",
+                                    "info": {
+                                        "function": {
+                                            "name": "__main__.TestClass.test1",
+                                            "args": "(<__main__.TestClass object at 0x7fa81195a390>,)",
+                                            "kwargs": "{}"
+                                        },
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "started": 10612,
+                                "meta.raw_payload.trace class-stop": {
+                                    "name": "trace class-stop",
+                                    "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                    "trace_id": "eaaadbb4-67e6-4a04-8590-854619413656",
+                                    "parent_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                                    "timestamp": "2018-03-31T15:22:12.577567",
+                                    "info": {
+                                        "host": "linux-r0m1"
+                                    },
+                                    "project": "test_project",
+                                    "service": "test_service"
+                                },
+                                "finished": 11715,
+                                "exception": "None"
+                            },
+                            "trace_id": "eaaadbb4-67e6-4a04-8590-854619413656",
+                            "parent_id": "44684439-53e5-4e97-85ab-87acd7855ee4",
+                            "children": [
+                                {
+                                    "info": {
+                                        "name": "trace WQWW",
+                                        "project": "test_project",
+                                        "service": "test_service",
+                                        "host": "linux-r0m1",
+                                        "meta.raw_payload.trace WQWW-start": {
+                                            "name": "trace WQWW-start",
+                                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                            "trace_id": "01c17b86-5a31-4f67-ba53-1a9fd3aea576",
+                                            "parent_id": "eaaadbb4-67e6-4a04-8590-854619413656",
+                                            "timestamp": "2018-03-31T15:22:11.475519",
+                                            "info": {
+                                                "function": {
+                                                    "name": "__main__.TestClass2.test1",
+                                                    "args": "(<__main__.TestClass2 object at 0x7fa81190d4a8>,)",
+                                                    "kwargs": "{}"
+                                                },
+                                                "host": "linux-r0m1"
+                                            },
+                                            "project": "test_project",
+                                            "service": "test_service"
+                                        },
+                                        "started": 10613,
+                                        "meta.raw_payload.trace WQWW-stop": {
+                                            "name": "trace WQWW-stop",
+                                            "base_id": "893a4681-b11f-47b9-b82c-ff8d2a992c45",
+                                            "trace_id": "01c17b86-5a31-4f67-ba53-1a9fd3aea576",
+                                            "parent_id": "eaaadbb4-67e6-4a04-8590-854619413656",
+                                            "timestamp": "2018-03-31T15:22:12.577010",
+                                            "info": {
+                                                "host": "linux-r0m1"
+                                            },
+                                            "project": "test_project",
+                                            "service": "test_service"
+                                        },
+                                        "finished": 11714,
+                                        "exception": "None"
+                                    },
+                                    "trace_id": "01c17b86-5a31-4f67-ba53-1a9fd3aea576",
+                                    "parent_id": "eaaadbb4-67e6-4a04-8590-854619413656",
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "stats": {
+        "first": {
+            "count": 1,
+            "duration": 11715
+        },
+        "third": {
+            "count": 1,
+            "duration": 3003
+        },
+        "test": {
+            "count": 1,
+            "duration": 1
+        },
+        "trace class": {
+            "count": 4,
+            "duration": 9813
+        },
+        "trace WQWW": {
+            "count": 4,
+            "duration": 5503
+        }
+    }
+};
+
+            angular
+                .module('app', ['ui.bootstrap', 'hljs', 'ui.tree', 'ui.tree-filter'])
+                .config(['$rootScopeProvider', function ($rootScopeProvider) {
+                    $rootScopeProvider.digestTtl(50);
+                }])
+                .config(['hljsServiceProvider', function (hljsServiceProvider) {
+                    hljsServiceProvider.setOptions({
+                        // replace tab with 4 spaces
+                        tabReplace: '    '
+                    });
+                }])
+                .config(['uiTreeFilterSettingsProvider', function (uiTreeFilterSettingsProvider) {
+                    uiTreeFilterSettingsProvider.addresses = [
+                        'info.name',
+                        'info.project',
+                        'info.service',
+                        'info.host'
+                    ];
+                    uiTreeFilterSettingsProvider.descendantCollection = 'children';
+                }])
+                .controller('ProfilerController', ProfilerController)
+                .controller('ModalInstanceController', ModalInstanceController);
+
+            // Inject services
+            ProfilerController.$inject = ['$filter', '$uibModal'];
+            ModalInstanceController.$inject = ['$uibModalInstance', 'info'];
+
+            function ProfilerController($filter, $uibModal) {
+                // NOTE(tovin07): Bind this to vm. This is controller as and vm syntax.
+                // This style is mainstream now. It replaces $scope style.
+                // Ref: https://johnpapa.net/angularjss-controller-as-and-the-vm-variable/
+                var vm = this;
+
+                vm.filter = $filter('uiTreeFilter');
+
+                var converInput = function(input, level) {
+                    level = (level) ? level : 0;
+                    input.level = level;
+                    input.is_leaf = !input.children.length;
+
+                    for (var i = 0; i < input.children.length; i++) {
+                        converInput(input.children[i], level + 1);
+                    }
+                    return input;
+                };
+
+                vm.isLastTrace = function(started) {
+                    if (started >=0 && started == vm.tree[0].info.last_trace_started) {
+                        return true;
+                    }
+                    return false;
+                };
+
+                vm.getWidth = function(data) {
+                    var fullDuration = vm.tree[0].info.finished;
+                    var duration = (data.info.finished - data.info.started) * 100.0 / fullDuration;
+                    return (duration >= 0.5) ? duration : 0.5;
+                };
+
+                vm.getStarted = function(data) {
+                    var fullDuration = vm.tree[0].info.finished;
+                    return data.info.started * 100.0 / fullDuration;
+                };
+
+                vm.isImportance = function(data) {
+                    return ['total', 'wsgi', 'rpc'].indexOf(data.info.name) != -1;
+                };
+
+                vm.display = function(data) {
+                    $uibModal.open({
+                        animation: true,
+                        templateUrl: 'modal_renderer.html',
+                        controller: 'ModalInstanceController',
+                        controllerAs: 'modal',
+                        size: 'lg',
+                        resolve: {
+                            info: function() {
+                                return angular.copy(data.info);
+                            }
+                        }
+                    });
+                };
+
+                vm.tree = [converInput(OSProfilerData)];
+            }
+
+            function ModalInstanceController($uibModalInstance, info){
+                var modal = this;
+                var metadata = {};
+                angular.forEach(info, function(value, key) {
+                    var parts = key.split('.');
+                    var metaText = 'meta';
+                    if (parts[0] == metaText) {
+                        if (parts.length == 2) {
+                            this[parts[1]] = value;
+                        } else {
+                            var groupName = parts[1];
+                            if (!(groupName in this)) {
+                                this[groupName] = {};
+                            }
+                            // Plus 2 for 2 dots such as: meta.raw_payload.heat.wsgi-start
+                            var index = metaText.length + parts[1].length + 2;
+                            this[groupName][key.slice(index)] = value;
+                        }
+                    };
+                }, metadata);
+
+                info.duration = info.finished - info.started;
+                // Escape single-quotes to prevent angular parse lexerr
+                info.metadata = JSON.stringify(metadata, null, 4).replace(/'/g, "\\'");
+
+                // Bind to view model
+                modal.info = info;
+
+                modal.columns = [
+                    ['name', 'project', 'service', 'host'],
+                    ['started', 'finished', 'duration', 'exception']
+                ];
+
+                modal.toggleWrap = function() {
+                    var element = angular.element(document.querySelector('code.hljs'));
+
+                    var wrappedClass = 'wrapped';
+                    var isWrapped = element.hasClass(wrappedClass);
+                    if (isWrapped) {
+                        element.removeClass(wrappedClass);
+                    } else {
+                        element.addClass(wrappedClass);
+                    }
+                };
+
+                modal.close = function() {
+                    $uibModalInstance.dismiss('close');
+                };
+            }
+        })(window.angular);
+    </script>
+    <!--Tree item template-->
+    <script type="text/ng-template" id="tree_item_renderer.html">
+        <div ng-init="hide_children=false">
+            <table class="trace cursor_pointer_on_hover">
+                <tr ng-class="{'bg-success': vm.isLastTrace(data.info.started)}">
+                    <td class="level" style="padding-left: {{::data.level * 5}}px;">
+                        <button type="button" class="btn btn-default btn-xs" ng-disabled="data.is_leaf" ng-click="hide_children=!hide_children">
+                            <span class="glyphicon glyphicon-{{(data.is_leaf) ? 'cloud' : ((hide_children) ? 'plus': 'minus')}}"></span>
+                            {{::data.level || 0}}
+                        </button>
+                    </td>
+                    <td ng-click="vm.display(data)" class="text-center">
+                        <div class="duration" style="width: {{vm.getWidth(data)}}%; margin-left: {{vm.getStarted(data)}}%;">
+                            <div>{{data.info.finished - data.info.started}} ms</div>
+                        </div>
+                    </td>
+                    <td ng-click="vm.display(data)" class="{{vm.isImportance(data) ? 'bold' : ''}} text-right">{{::data.info.name}}</td>
+                    <td ng-click="vm.display(data)">{{::data.info.project || "n/a"}}</td>
+                    <td ng-click="vm.display(data)">{{::data.info.service || "n/a"}}</td>
+                    <td ng-click="vm.display(data)">{{::data.info.host || "n/a"}}</td>
+                    <td class="details">
+                        <a href="#" ng-click="vm.display(data)">Details</a>
+                    </td>
+                </tr>
+            </table>
+            <div ui-tree-nodes ng-model="data.children" ng-hide="hide_children">
+                <div ui-tree-node ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'" ng-hide="!vm.filter(data, vm.filterPattern)"></div>
+            </div>
+        </div>
+    </script>
+    <!--Modal template-->
+    <script type="text/ng-template" id="modal_renderer.html">
+        <div class="modal-header">
+            <h3 class="text-center">
+                <strong>Trace Point Details</strong>
+                <span class="btn btn-default pull-right toggle-button" ng-click="modal.toggleWrap()">Toggle wrap-text</span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6" ng-repeat="cols in modal.columns">
+                    <dl class="dl-horizontal" ng-repeat="column in cols">
+                        <dt class="text-capitalize">{{::column}}</dt>
+                        <dd>{{::modal.info[column]}}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-12">
+                    <!--For metadata only-->
+                    <dl class="dl-horizontal">
+                        <dt class="text-capitalize">metadata</dt>
+                        <dd hljs hljs-language="json" hljs-source="'{{::modal.info.metadata}}'"></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <span class="btn btn-default" ng-click="modal.close()">Close</span>
+        </div>
+    </script>
+    <!--Body-->
+    <div ng-controller="ProfilerController as vm">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="filterPattern" class="col-md-4 control-label">Span filtering:</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="filterPattern"
+                        placeholder="Input your regular expression pattern here"
+                        ng-model="vm.filterPattern">
+                </div>
+            </div>
+        </form>
+        <table class="trace">
+            <tr class="bold text-left" style="border-bottom: solid 1px gray;">
+                <td class="level">Levels</td>
+                <td>Duration</td>
+                <td class="text-right">Type</td>
+                <td>Project</td>
+                <td>Service</td>
+                <td>Host</td>
+                <td class="details">Details</td>
+            </tr>
+        </table>
+        <div ui-tree>
+            <div ui-tree-nodes ng-model="vm.tree">
+                <div ui-tree-node ng-repeat="data in vm.tree" ng-include="'tree_item_renderer.html'" ng-hide="!vm.filter(data, vm.filterPattern)"></div>
+            </div>
+        </div>
+    </div>
+
